@@ -64,8 +64,6 @@
     [self.codeContainer.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
     [self.codeContainer.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
 
-    [self _installParticles];
-
     self.codeView = [[NSClassFromString(@"VPPresenterView") alloc] initWithFrame:CGRectZero];
     self.codeView.translatesAutoresizingMaskIntoConstraints = NO;
 
@@ -79,18 +77,6 @@
     [self.codeView setVerificationCode:@"Hello, world"];
 
     [self _installCodeField];
-}
-
-- (void)_installParticles
-{
-    NSData *assetData = [[NSDataAsset alloc] initWithName:@"particles"].data;
-    if (!assetData) return;
-
-    NSDictionary *caar = [NSKeyedUnarchiver unarchiveObjectWithData:assetData];
-    CALayer *rootLayer = caar[@"rootLayer"];
-    if (!rootLayer) return;
-
-    [self.codeContainer.layer addSublayer:rootLayer];
 }
 
 - (void)_installCodeField
